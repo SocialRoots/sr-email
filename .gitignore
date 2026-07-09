@@ -1,0 +1,7 @@
+/go/bin/
+/vendor/
+/.idea/
+*.test
+*.out
+data/
+api
