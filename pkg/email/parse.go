@@ -11,14 +11,14 @@ func ExtractReplyText(strippedText, strippedHTML, bodyHTML string) string {
 	p := bluemonday.StrictPolicy()
 
 	if strippedText != "" {
-		return strippedText
+		return strings.TrimSpace(strippedText)
 	}
 	if strippedHTML != "" {
-		return p.Sanitize(strippedHTML)
+		return strings.TrimSpace(p.Sanitize(strippedHTML))
 	}
 	if bodyHTML != "" {
 		parts := strings.SplitN(bodyHTML, "------ Original Message ------", 2)
-		return p.Sanitize(parts[0])
+		return strings.TrimSpace(p.Sanitize(parts[0]))
 	}
 	return ""
 }

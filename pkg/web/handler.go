@@ -10,6 +10,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/SocialRoots/sr-email/pkg/email"
@@ -18,17 +19,18 @@ import (
 )
 
 type mailgunPayload struct {
-	Timestamp    string `form:"timestamp"`
-	Token        string `form:"token"`
-	Signature    string `form:"signature"`
-	Recipient    string `form:"recipient"`
-	Sender       string `form:"sender"`
-	From         string `form:"from"`
-	Subject      string `form:"subject"`
-	StrippedText string `form:"stripped-text"`
-	StrippedHTML string `form:"stripped-html"`
-	BodyHTML     string `form:"body-html"`
-	BodyPlain    string `form:"body-plain"`
+	Timestamp    string   `form:"timestamp"`
+	Token        string   `form:"token"`
+	Signature    string   `form:"signature"`
+	Recipient    string   `form:"recipient"`
+	Sender       string   `form:"sender"`
+	From         string   `form:"from"`
+	Subject      string   `form:"subject"`
+	StrippedText string   `form:"stripped-text"`
+	StrippedHTML string   `form:"stripped-html"`
+	BodyHTML     []string `form:"body-html"`
+	BodyPlain    string   `form:"body-plain"`
+	MessageHeaders string `form:"message-headers"`
 }
 
 type replyPayload struct {
@@ -62,7 +64,12 @@ func (s *server) handleInbound(c *gin.Context) {
 
 	go email.SaveRaw(raw, p.Timestamp, p.Recipient)
 
-	replyText := email.ExtractReplyText(p.StrippedText, p.StrippedHTML, p.BodyHTML)
+	// Join multiple body-html parts if present; fall back to body-plain.
+	rawHTML := strings.Join(p.BodyHTML, "\n")
+	if rawHTML == "" {
+		rawHTML = p.BodyPlain
+	}
+	replyText := email.ExtractReplyText(p.StrippedText, p.StrippedHTML, rawHTML)
 	noteLink := email.ExtractNoteLink(p.Recipient)
 	replyName := email.ExtractReplyName(p.From)
 
