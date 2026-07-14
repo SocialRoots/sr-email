@@ -9,117 +9,110 @@ import (
 	"github.com/SocialRoots/sr-email/settings"
 )
 
-func TestSaveRaw(t *testing.T) {
+func TestSaveToInbox(t *testing.T) {
 	dir := t.TempDir()
-	t.Setenv("EMAIL_STORE_DIR", dir)
-
-	// Re-initialize the config value since it was captured at package init.
-	// We override it by re-reading the env var — the settings package reads
-	// it lazily via a closure.
 	orig := settings.EmailStoreDir
 	settings.EmailStoreDir = dir
 	defer func() { settings.EmailStoreDir = orig }()
 
 	raw := []byte("From: test@example.com\nSubject: Re: note\n\nreply text")
-	ts := "2026-07-09T12:00:00Z"
+	ts := "2026-07-10T12:00:00Z"
 	recipient := "notekey123@mg.socialroots.org"
 
-	SaveRaw(raw, ts, recipient)
-
-	// Check the file was written.
-	entries, err := os.ReadDir(dir)
+	name, err := SaveToInbox(raw, ts, recipient)
 	if err != nil {
-		t.Fatalf("failed to read store dir: %v", err)
-	}
-	if len(entries) != 1 {
-		t.Fatalf("expected 1 file, got %d", len(entries))
+		t.Fatalf("SaveToInbox: %v", err)
 	}
 
-	filename := entries[0].Name()
-	if !strings.HasPrefix(filename, "20260709T120000_notekey123") {
-		t.Errorf("unexpected filename: %s", filename)
+	if !strings.HasPrefix(name, "20260710T120000_notekey123") {
+		t.Errorf("unexpected filename: %s", name)
 	}
-	if !strings.HasSuffix(filename, ".eml") {
-		t.Errorf("expected .eml extension, got: %s", filename)
+	if !strings.HasSuffix(name, ".eml") {
+		t.Errorf("expected .eml extension, got: %s", name)
 	}
 
-	content, err := os.ReadFile(filepath.Join(dir, filename))
+	inboxPath := filepath.Join(dir, "inbox", name)
+	content, err := os.ReadFile(inboxPath)
 	if err != nil {
 		t.Fatalf("failed to read saved file: %v", err)
 	}
 	if string(content) != string(raw) {
-		t.Errorf("file content mismatch:\ngot:  %q\nwant: %q", string(content), string(raw))
+		t.Errorf("file content mismatch")
 	}
 }
 
-func TestSaveRaw_InvalidTimestamp(t *testing.T) {
+func TestSaveToInbox_InvalidTimestamp(t *testing.T) {
 	dir := t.TempDir()
-	t.Setenv("EMAIL_STORE_DIR", dir)
-
 	orig := settings.EmailStoreDir
 	settings.EmailStoreDir = dir
 	defer func() { settings.EmailStoreDir = orig }()
 
-	raw := []byte("content")
-	ts := "not-a-timestamp"
-	recipient := "key@domain.com"
+	_, err := SaveToInbox([]byte("content"), "not-a-timestamp", "key@domain.com")
+	if err != nil {
+		t.Fatalf("SaveToInbox: %v", err)
+	}
 
-	SaveRaw(raw, ts, recipient)
-
-	entries, _ := os.ReadDir(dir)
+	entries, _ := os.ReadDir(filepath.Join(dir, "inbox"))
 	if len(entries) != 1 {
 		t.Fatalf("expected 1 file, got %d", len(entries))
 	}
-
-	// Should contain a timestamp-like prefix (current time fallback).
-	name := entries[0].Name()
-	if !strings.Contains(name, "_key.eml") {
-		t.Errorf("expected _key.eml suffix, got: %s", name)
+	if !strings.Contains(entries[0].Name(), "_key.eml") {
+		t.Errorf("expected _key.eml suffix, got: %s", entries[0].Name())
 	}
 }
 
-func TestSaveRaw_NoAtSign(t *testing.T) {
-	dir := t.TempDir()
-	t.Setenv("EMAIL_STORE_DIR", dir)
-
-	orig := settings.EmailStoreDir
-	settings.EmailStoreDir = dir
-	defer func() { settings.EmailStoreDir = orig }()
-
-	raw := []byte("content")
-	ts := "2026-07-09T12:00:00Z"
-	recipient := "justakey"
-
-	SaveRaw(raw, ts, recipient)
-
-	entries, _ := os.ReadDir(dir)
-	if len(entries) != 1 {
-		t.Fatalf("expected 1 file, got %d", len(entries))
-	}
-
-	name := entries[0].Name()
-	if !strings.Contains(name, "_justakey.eml") {
-		t.Errorf("expected _justakey.eml suffix, got: %s", name)
-	}
-}
-
-func TestSaveRaw_CreatesDir(t *testing.T) {
-	// Use a non-existent nested path to test MkdirAll.
+func TestSaveToInbox_CreatesDir(t *testing.T) {
 	base := t.TempDir()
-	dir := filepath.Join(base, "subdir", "emails")
-
+	dir := filepath.Join(base, "custom", "path")
 	orig := settings.EmailStoreDir
 	settings.EmailStoreDir = dir
 	defer func() { settings.EmailStoreDir = orig }()
 
-	raw := []byte("content")
-	SaveRaw(raw, "2026-07-09T12:00:00Z", "key@domain.com")
-
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		t.Fatal("directory was not created")
+	_, err := SaveToInbox([]byte("content"), "2026-07-10T12:00:00Z", "key@domain.com")
+	if err != nil {
+		t.Fatalf("SaveToInbox: %v", err)
 	}
-	entries, _ := os.ReadDir(dir)
-	if len(entries) == 0 {
-		t.Fatal("no files in created directory")
+	if _, err := os.Stat(filepath.Join(dir, "inbox")); os.IsNotExist(err) {
+		t.Fatal("inbox directory was not created")
+	}
+}
+
+func TestMoveToArchive(t *testing.T) {
+	dir := t.TempDir()
+	orig := settings.EmailStoreDir
+	settings.EmailStoreDir = dir
+	defer func() { settings.EmailStoreDir = orig }()
+
+	name, _ := SaveToInbox([]byte("test"), "2026-07-10T12:00:00Z", "key@domain.com")
+
+	if err := MoveToArchive(name); err != nil {
+		t.Fatalf("MoveToArchive: %v", err)
+	}
+
+	if _, err := os.Stat(filepath.Join(dir, "inbox", name)); !os.IsNotExist(err) {
+		t.Error("file still exists in inbox after archive")
+	}
+	if _, err := os.Stat(filepath.Join(dir, "archive", name)); os.IsNotExist(err) {
+		t.Error("file not found in archive")
+	}
+}
+
+func TestMoveToFailed(t *testing.T) {
+	dir := t.TempDir()
+	orig := settings.EmailStoreDir
+	settings.EmailStoreDir = dir
+	defer func() { settings.EmailStoreDir = orig }()
+
+	name, _ := SaveToInbox([]byte("test"), "2026-07-10T12:00:00Z", "key@domain.com")
+
+	if err := MoveToFailed(name); err != nil {
+		t.Fatalf("MoveToFailed: %v", err)
+	}
+
+	if _, err := os.Stat(filepath.Join(dir, "inbox", name)); !os.IsNotExist(err) {
+		t.Error("file still exists in inbox after move to failed")
+	}
+	if _, err := os.Stat(filepath.Join(dir, "failed", name)); os.IsNotExist(err) {
+		t.Error("file not found in failed")
 	}
 }

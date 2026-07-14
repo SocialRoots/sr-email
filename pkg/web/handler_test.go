@@ -5,14 +5,13 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/SocialRoots/sr-email/settings"
 	"github.com/gin-gonic/gin"
@@ -56,30 +55,10 @@ func TestHandleInbound_Valid(t *testing.T) {
 	restore := saveSettings()
 	defer restore()
 
+	emailStore := t.TempDir()
 	settings.MailgunAPIKey = testAPIKey
-	settings.EmailStoreDir = t.TempDir()
+	settings.EmailStoreDir = emailStore
 
-	// Mock RS-RESPONSES server.
-	var gotPayload json.RawMessage
-	mux := http.NewServeMux()
-	mux.HandleFunc("/response/reply", func(w http.ResponseWriter, r *http.Request) {
-		// Verify internal token was sent.
-		if r.Header.Get("X-SR-Internal-Token") != testInternalToken {
-			t.Errorf("missing or wrong X-SR-Internal-Token: %q", r.Header.Get("X-SR-Internal-Token"))
-		}
-		if r.Header.Get("Content-Type") != "application/json" {
-			t.Errorf("Content-Type = %q, want application/json", r.Header.Get("Content-Type"))
-		}
-		gotPayload = make(json.RawMessage, 0)
-		json.NewDecoder(r.Body).Decode(&gotPayload)
-		w.WriteHeader(200)
-	})
-	mock := httptest.NewServer(mux)
-	defer mock.Close()
-	settings.ResponsesServiceURL = mock.URL
-	settings.InternalToken = testInternalToken
-
-	// Build the form-encoded POST body.
 	sig := computeSignature(testAPIKey, testTimestamp, testToken)
 	form := url.Values{
 		"timestamp":     {testTimestamp},
@@ -107,47 +86,14 @@ func TestHandleInbound_Valid(t *testing.T) {
 		t.Errorf("status = %d, want 200; body = %s", w.Code, w.Body.String())
 	}
 
-	// Verify the forwarded payload.
-	var rp replyPayload
-	if err := json.Unmarshal(gotPayload, &rp); err != nil {
-		t.Fatalf("failed to unmarshal forwarded payload: %v", err)
+	// Verify the file landed in inbox/.
+	inboxDir := filepath.Join(emailStore, "inbox")
+	entries, _ := os.ReadDir(inboxDir)
+	if len(entries) == 0 {
+		t.Fatal("no file in inbox")
 	}
-	if rp.Link != "notekey123" {
-		t.Errorf("Link = %q, want %q", rp.Link, "notekey123")
-	}
-	if rp.Reply != testStrippedText {
-		t.Errorf("Reply = %q, want %q", rp.Reply, testStrippedText)
-	}
-	if rp.ReplyName != "Jane Smith" {
-		t.Errorf("ReplyName = %q, want %q", rp.ReplyName, "Jane Smith")
-	}
-	if rp.ReplyEmail != testSender {
-		t.Errorf("ReplyEmail = %q, want %q", rp.ReplyEmail, testSender)
-	}
-
-	// Verify the raw email was saved to disk.
-	// SaveRaw runs as a goroutine; give it time to complete.
-	var files []os.FileInfo
-	for i := 0; i < 10; i++ {
-		entries, _ := os.ReadDir(settings.EmailStoreDir)
-		if len(entries) > 0 {
-			files = make([]os.FileInfo, len(entries))
-			for j, e := range entries {
-				info, _ := e.Info()
-				files[j] = info
-			}
-			break
-		}
-		time.Sleep(10 * time.Millisecond)
-	}
-	if len(files) == 0 {
-		t.Fatal("no email file was written to disk")
-	}
-	if !strings.HasSuffix(files[0].Name(), ".eml") {
-		t.Errorf("expected .eml file, got %s", files[0].Name())
-	}
-	if files[0].Size() == 0 {
-		t.Errorf("email file is empty")
+	if !strings.HasSuffix(entries[0].Name(), ".eml") {
+		t.Errorf("expected .eml file, got %s", entries[0].Name())
 	}
 }
 
@@ -215,8 +161,6 @@ func TestHandleInbound_MissingFormData(t *testing.T) {
 	settings.EmailStoreDir = t.TempDir()
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
-	// Send an empty body — form parsing succeeds (no fields) but no
-	// recipient/sender means the reply will be incomplete.
 	c.Request = httptest.NewRequest(http.MethodPost, "/api/email/inbound",
 		strings.NewReader(""))
 	c.Request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
@@ -224,50 +168,20 @@ func TestHandleInbound_MissingFormData(t *testing.T) {
 	s := &server{env: "test"}
 	s.handleInbound(c)
 
-	// Should return 200 because the email is saved to file.
-	// The forward will fail with an empty link, but that's a soft error.
+	// Empty body: ParseRawPayload returns empty fields, file saved to inbox.
 	if w.Code != http.StatusOK {
 		t.Errorf("empty form should return 200, got %d; body = %s",
 			w.Code, w.Body.String())
 	}
-}
 
-func TestHandleInbound_ForwardFailStill200(t *testing.T) {
-	restore := saveSettings()
-	defer restore()
-
-	settings.MailgunAPIKey = testAPIKey
-	settings.EmailStoreDir = t.TempDir()
-	// Point to a server that will refuse the connection.
-	settings.ResponsesServiceURL = "http://127.0.0.1:1"
-	settings.InternalToken = testInternalToken
-
-	sig := computeSignature(testAPIKey, testTimestamp, testToken)
-	form := url.Values{
-		"timestamp":     {testTimestamp},
-		"token":         {testToken},
-		"signature":     {sig},
-		"recipient":     {testRecipient},
-		"sender":        {testSender},
-		"from":          {testFrom},
-		"stripped-text": {testStrippedText},
-	}
-
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest(http.MethodPost, "/api/email/inbound",
-		strings.NewReader(form.Encode()))
-	c.Request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-
-	s := &server{env: "test"}
-	s.handleInbound(c)
-
-	// Should still return 200 since the email was saved.
-	if w.Code != http.StatusOK {
-		t.Errorf("should return 200 even if forward fails, got %d; body = %s",
-			w.Code, w.Body.String())
+	// File should still be saved.
+	inbox := filepath.Join(settings.EmailStoreDir, "inbox")
+	entries, _ := os.ReadDir(inbox)
+	if len(entries) == 0 {
+		t.Error("expected a file in inbox even with empty body")
 	}
 }
+
 
 func TestHandleInbound_MultipartFormData(t *testing.T) {
 	restore := saveSettings()

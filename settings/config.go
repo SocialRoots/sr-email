@@ -1,6 +1,9 @@
 package settings
 
-import "os"
+import (
+	"os"
+	"time"
+)
 
 var Env = os.Getenv("ENV")
 var ApiPort = os.Getenv("API_PORT")
@@ -14,4 +17,13 @@ var EmailStoreDir = func() string {
 		return d
 	}
 	return "./data/emails"
+}()
+
+var CronInterval = func() time.Duration {
+	if s := os.Getenv("CRON_INTERVAL"); s != "" {
+		if d, err := time.ParseDuration(s); err == nil {
+			return d
+		}
+	}
+	return 30 * time.Second
 }()
