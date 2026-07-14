@@ -1,0 +1,434 @@
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="To"
+
+9479e7adea1b4076bad68b0177071e46@reply.alpha.socialroots.io
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="recipient"
+
+9479e7adea1b4076bad68b0177071e46@reply.alpha.socialroots.io
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="from"
+
+Nigini Oliveira <social+roots@nigini.me>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Received"
+
+from mail-24422.protonmail.ch (mail-24422.protonmail.ch [109.224.244.22]) by ca6c492e82e746a0b1a9f64cc77a4a47d02ad7730a232252e8b8bf6cc551351e with SMTP id <undefined> (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256); Tue, 14 Jul 2026 22:39:37 GMT
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="X-Mailgun-Incoming"
+
+Yes
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="In-Reply-To"
+
+<1783562314359401418.1.2983026081944559550@7170369ac992>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="X-Pm-Message-Id"
+
+ecf75266690ea9ed31b1dfa3409134ff4e3fae2b
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="message-headers"
+
+[["Received","from mail-24422.protonmail.ch (mail-24422.protonmail.ch [109.224.244.22]) by ca6c492e82e746a0b1a9f64cc77a4a47d02ad7730a232252e8b8bf6cc551351e with SMTP id <undefined> (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256); Tue, 14 Jul 2026 22:39:37 GMT"],["Authentication-Results","mxa.mailgun.org; dkim=pass header.d=nigini.me header.s=protonmail3 header.b=b2At3p9x; spf=pass (domain nigini.me designates 109.224.244.22 as permitted sender) smtp.mailfrom=\"social+roots@nigini.me\"; spf=pass (domain mail-24422.protonmail.ch designates 109.224.244.22 as permitted sender) smtp.helo=\"mail-24422.protonmail.ch\"; dmarc=pass (dkim=pass domain=nigini.me; spf=pass domain=nigini.me) header.from=nigini.me"],["X-Mailgun-Incoming","Yes"],["X-Envelope-From","social+roots@nigini.me"],["Dkim-Signature","v=1; a=rsa-sha256; c=relaxed/relaxed; d=nigini.me; s=protonmail3; t=1784068775; x=1784327975; bh=hWArFAwy++eeAp/ExH9SBe1AkCRen5HN9kZ7zg94lrg=; h=Date:To:From:Subject:Message-ID:In-Reply-To:References: Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID: Message-ID:BIMI-Selector; b=b2At3p9xvVPGqcFCCzye4aJ91WreAqdiSOPPVJDTJj328B9oBLgob1s2vIxdyIzws zH+YDA1fX7T1GVJ9QhTpMZ7te0AOpsPCBDYqssyMLlt/TnmidxgH7+1w0JtmveniA8 gM9CQ4KDhoOa4tQJ9hy3tLSbNcH/+B8RHCN9OXy7rzSBbIqUH9sXAvEfsK175Fw9FK KbLFQ/UD1hX1Ew3gWi2iEQcHN5I8EHL/qiGvCWQk6QI7F15lnGoeARcGi4nNB94cAa d2YwMvopBmBB1N/Q3Yo039xNjRYFBaTEYnS1AgC6HoYPZlHhVXWoV8S3zrJ5QpO9N4 pynNrdgsmBr5Q=="],["Date","Tue, 14 Jul 2026 22:39:30 +0000"],["To","9479e7adea1b4076bad68b0177071e46@reply.alpha.socialroots.io"],["From","Nigini Oliveira <social+roots@nigini.me>"],["Subject","Re: New replies in Welcome to secured-up Socialroots..."],["Message-Id","<Yf-ur__Yn-WqTyCra03vUC8mzjYZ8R9CKlPIE9GjtHN82X6nYaAAgt0dklFX4R-IaGdVBooghBbcUflvcEAwrVnrOpWZQY0Ds2OCN0XobMc=@nigini.me>"],["In-Reply-To","<1783562314359401418.1.2983026081944559550@7170369ac992>"],["References","<1783562314359401418.1.2983026081944559550@7170369ac992>"],["Feedback-Id","107580415:user:proton"],["X-Pm-Message-Id","ecf75266690ea9ed31b1dfa3409134ff4e3fae2b"],["Mime-Version","1.0"],["Content-Type","multipart/signed; protocol=\"application/pgp-signature\"; micalg=pgp-sha512; boundary=\"------c72967338cae5a5573dd048e31007306fafdad3df4026c89269f27b55d1385f8\"; charset=utf-8"]]
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Authentication-Results"
+
+mxa.mailgun.org; dkim=pass header.d=nigini.me header.s=protonmail3 header.b=b2At3p9x; spf=pass (domain nigini.me designates 109.224.244.22 as permitted sender) smtp.mailfrom="social+roots@nigini.me"; spf=pass (domain mail-24422.protonmail.ch designates 109.224.244.22 as permitted sender) smtp.helo="mail-24422.protonmail.ch"; dmarc=pass (dkim=pass domain=nigini.me; spf=pass domain=nigini.me) header.from=nigini.me
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Subject"
+
+Re: New replies in Welcome to secured-up Socialroots...
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="References"
+
+<1783562314359401418.1.2983026081944559550@7170369ac992>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Feedback-Id"
+
+107580415:user:proton
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Content-Type"
+
+multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha512; boundary="------c72967338cae5a5573dd048e31007306fafdad3df4026c89269f27b55d1385f8"; charset=utf-8
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="body-plain"
+
+Can I reply to this via email??? 🤞
+
+
+Sent with Proton Mail secure email.
+
+On Wednesday, July 8th, 2026 at 6:58 PM, Socialroots <notification@groups.socialroots.io> wrote:
+
+> Nigini Oliveira
+> 
+
+> SR dev test
+> 
+
+> Welcome to secured-up Socialroots...
+> 
+
+> See all new replies
+> 
+
+> Ana Jamborcic added:
+> 
+
+> Thanks. I am able to reply to this from my workspace but not from the group.
+> 
+
+> Ana Jamborcic added:
+> 
+
+> ok, now it works from the group. but it took a while. maybe a network issue?
+> 
+
+> Open note
+> 
+
+> You are getting an email for every reply in this note.
+> To change email notifications settings click here
+> 
+
+> You can reply directly to this email to add your response.
+> 
+
+> Please add notification@groups.socialroots.io to your contacts!
+> 
+
+> Platform Link: https://socialroots.wicked.coop
+> 
+
+> Website: https://www.socialroots.io
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="body-html"
+
+<div style="font-family: Arial, sans-serif; font-size: 14px;">Can I reply to this via email???&nbsp;🤞<br></div><div style="font-family: Arial, sans-serif; font-size: 14px;"><br></div>
+<div style="font-family: Arial, sans-serif; font-size: 14px;" class="protonmail_signature_block">
+    <div class="protonmail_signature_block-user protonmail_signature_block-empty">
+        
+            </div>
+    
+            <div class="protonmail_signature_block-proton">
+        Sent with <a href="https://proton.me/mail/home" target="_blank">Proton Mail</a> secure email.
+    </div>
+</div>
+<div style="font-family: Arial, sans-serif; font-size: 14px;"><br></div><div class="protonmail_quote">
+        On Wednesday, July 8th, 2026 at 6:58 PM, Socialroots &lt;notification@groups.socialroots.io&gt; wrote:<br>
+        <blockquote class="protonmail_quote" type="cite">
+            
+
+<div style="display: none; max-height: 0px; overflow: hidden;">
+    Ana Jamborcic contributed to this note.
+</div>
+
+<div style="display: none; max-height: 0px; overflow: hidden;">
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+    &nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+</div>
+    <div style="background-color: #F3F4F6; margin-bottom: 10px;" cellspacing="0" cellpadding="0" border="0" width="600px">
+
+        <table style="background-color: #ffffff; margin-bottom: 10px;" align="center" cellspacing="0" cellpadding="0" border="0" width="600px">
+            <tbody><tr>
+                <td style="padding:10px 0 0 10px">
+    <table cellspacing="5" cellpadding="0" border="0">
+    <tbody><tr>
+        <td width="400"><img alt="Socialroots" src="https://socialroots-media.s3.us-west-2.amazonaws.com/email_images/LogoMedium.png"></td>
+    </tr>
+    </tbody></table>
+</td>
+            </tr>
+            <tr>
+                <td style="padding:10px 10px 0 10px"><hr></td>
+            </tr>
+            <tr>
+               <td style="padding:0 0 0 10px">
+</td>
+            </tr>
+            <tr>
+                <td style="padding:0 0 0 10px"><table cellspacing="5" cellpadding="0" border="0" width="600">
+    <tbody><tr>
+        <td>
+
+<table cellspacing="0" cellpadding="0" border="0" width="580" align="left">
+    <tbody><tr>
+        <td rowspan="3" width="60">
+
+                <img width="40" height="40" style="border-radius:50%" alt="Nigini Oliveira" src="https://socialroots-image-uploads.s3.amazonaws.com/58319df49b0f11ef97587e9f3ba04b92-profile.png">
+
+        </td>
+    </tr>
+    <tr height="20">
+        <td style="vertical-align: bottom; font-size:16px; font-weight: 600;">Nigini Oliveira</td>
+
+
+
+
+
+
+
+
+    </tr>
+    <tr height="30" colspan="3">
+        <td colspan="2" style="vertical-align: middle;">SR dev test</td>
+    </tr>
+</tbody></table>
+
+        </td>
+    </tr>
+    <tr>
+        <td height="40" style="font-size:22px; font-weight:600;">Welcome to secured-up Socialroots...</td>
+    </tr>
+    <tr>
+        <td>
+    <table cellspacing="0" cellpadding="0" border="0" width="600" align="left">
+        <tbody><tr>
+            <td><a href="https://alpha.socialroots.io/note/0465dd1ae5124c4eb276b43f1282b6ec" target="_blank" rel="noreferrer nofollow noopener">See all new replies</a></td>
+        </tr>
+
+        </tbody></table><table>
+            <tbody><tr><td style="padding-top:20px; padding-bottom: 10px;"> Ana Jamborcic  added:</td></tr>
+            <tr>
+                <td>
+                    Thanks. I am able to reply to this from my workspace but not from the group.
+                </td>
+            </tr>
+        </tbody></table>
+
+        <table>
+            <tbody><tr><td style="padding-top:20px; padding-bottom: 10px;"> Ana Jamborcic  added:</td></tr>
+            <tr>
+                <td>
+                    ok, now it works from the group. but it took a while. maybe a network issue?
+                </td>
+            </tr>
+        </tbody></table>
+
+    </td></tr></tbody></table>
+</td>
+    </tr>
+    <tr>
+        <td>
+            <div style="display:table-cell; vertical-align: middle; width: 600px; height: 20px; border-bottom:1px solid #e2e8f0;">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+    <table cellspacing="5" cellpadding="0" border="0" width="600">
+        <tbody><tr height="50">
+            <td>
+                <a href="https://alpha.socialroots.io/note/0465dd1ae5124c4eb276b43f1282b6ec" style="text-decoration: none" target="_blank" rel="noreferrer nofollow noopener">
+                    <div style="display:table-cell;
+                        vertical-align:middle;
+                        width:150px;
+                        height:50px;
+                        background-color:#6B40CE;
+                        text-align:center;
+                        color:#FFFFFF;
+                        text-decoration:none;
+                        font-size:18px;
+                        border-radius:5px">
+                        <span>Open note</span>
+                    </div>
+                </a>
+            </td>
+        </tr>
+
+    </tbody></table></td>
+    </tr>
+
+    <tr>
+        <td>
+
+
+
+
+
+
+
+
+<table cellspacing="0" cellpadding="0" border="0" width="590" align="left">
+    <tbody><tr width="300">
+
+
+               <td height="60" align="left">
+                   <p style="font-size:16px; line-height:25px; width: 500px; margin-left:50px;">
+                        You are getting an email for every reply in this note.<br>
+                       To change email notifications settings  <a href="https://alpha.socialroots.io/note/0465dd1ae5124c4eb276b43f1282b6ec?volume=loud" target="_blank" rel="noreferrer nofollow noopener">click here</a>
+                   </p>
+               </td>
+
+
+
+
+
+
+    </tr>
+
+</tbody></table>
+</td>
+    </tr>
+
+</tbody></table>
+            
+        
+
+        <table align="center" cellspacing="0" cellpadding="0" border="0" width="625px" style="background-color: #f5f5f5; padding:12px 0px;">
+            <tbody><tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+    <table cellspacing="5" cellpadding="0" border="0">
+
+        <tbody><tr>
+            <td><p style="font-size:16px; font-weight: 900">You can reply directly to this email to add your response.</p></td>
+        </tr>
+
+        <tr>
+            <td style="font-size:14px;">
+                Please add <span style="font-weight: 900"><a href="mailto:notification@groups.socialroots.io" style="word-break: break-word;" rel="noreferrer nofollow noopener">notification@groups.socialroots.io</a></span> to your contacts!
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td style="font-size:12px;">
+                Platform Link: <a href="https://socialroots.wicked.coop" style="word-break: break-word;" target="_blank" rel="noreferrer nofollow noopener">https://socialroots.wicked.coop</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:12px;">
+                Website: <a href="https://www.socialroots.io" target="_blank" rel="noreferrer nofollow noopener">https://www.socialroots.io</a>
+            </td>
+        </tr>
+        <tr>
+            <td height="10"></td>
+        </tr>
+    </tbody></table>
+</td>
+            </tr>
+        </tbody></table>
+    </div>
+
+
+
+        </blockquote><br>
+    </div>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Date"
+
+Tue, 14 Jul 2026 22:39:30 +0000
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="From"
+
+Nigini Oliveira <social+roots@nigini.me>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Message-Id"
+
+<Yf-ur__Yn-WqTyCra03vUC8mzjYZ8R9CKlPIE9GjtHN82X6nYaAAgt0dklFX4R-IaGdVBooghBbcUflvcEAwrVnrOpWZQY0Ds2OCN0XobMc=@nigini.me>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="sender"
+
+social+roots@nigini.me
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="subject"
+
+Re: New replies in Welcome to secured-up Socialroots...
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="X-Envelope-From"
+
+social+roots@nigini.me
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Dkim-Signature"
+
+v=1; a=rsa-sha256; c=relaxed/relaxed; d=nigini.me; s=protonmail3; t=1784068775; x=1784327975; bh=hWArFAwy++eeAp/ExH9SBe1AkCRen5HN9kZ7zg94lrg=; h=Date:To:From:Subject:Message-ID:In-Reply-To:References: Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID: Message-ID:BIMI-Selector; b=b2At3p9xvVPGqcFCCzye4aJ91WreAqdiSOPPVJDTJj328B9oBLgob1s2vIxdyIzws zH+YDA1fX7T1GVJ9QhTpMZ7te0AOpsPCBDYqssyMLlt/TnmidxgH7+1w0JtmveniA8 gM9CQ4KDhoOa4tQJ9hy3tLSbNcH/+B8RHCN9OXy7rzSBbIqUH9sXAvEfsK175Fw9FK KbLFQ/UD1hX1Ew3gWi2iEQcHN5I8EHL/qiGvCWQk6QI7F15lnGoeARcGi4nNB94cAa d2YwMvopBmBB1N/Q3Yo039xNjRYFBaTEYnS1AgC6HoYPZlHhVXWoV8S3zrJ5QpO9N4 pynNrdgsmBr5Q==
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="Mime-Version"
+
+1.0
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="attachment-1"; filename="publickey - social+roots@nigini.me - 0xB25E4301.asc"
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xjMEZiMF+xYJKwYBBAHaRw8BAQdAv1dp5Q2jruBj0GkmTzyY21V/cBh1bEt2
+SgbASzvUkiXNI3NvY2lhbEBuaWdpbmkubWUgPHNvY2lhbEBuaWdpbmkubWU+
+wowEEBYKAD4FgmYjBfsECwkHCAmQaoVfSBb6Nz8DFQgKBBYAAgECGQECmwMC
+HgEWIQSyXkMBpntq1QVX3NNqhV9IFvo3PwAAF1gBAI7sdVMzBeRDZl/5Rswi
+6M6XZTv8Cz+39va0cIJYBT/UAQD1aEtRyuRrM6EUvxWrgHurUyzNi0+wHKjd
+TwwRhsS3Ds44BGYjBfsSCisGAQQBl1UBBQEBB0AVqBtvhFkv1HjZbZ39dJeG
+PwM6yJBvwy86i4XRMnJUUAMBCAfCeAQYFgoAKgWCZiMF+wmQaoVfSBb6Nz8C
+mwwWIQSyXkMBpntq1QVX3NNqhV9IFvo3PwAAqAsBANsbQ7dBz5sjIegjUjr1
+AxPNw7O2V5jpa9qQP7JgZYaZAP4kHq48bnAO3LPnCSUxU8OvO3lBdU3RVk8V
+gNslRk1lDA==
+=59jZ
+-----END PGP PUBLIC KEY BLOCK-----
+
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="attachment-2"; filename="signature.asc"
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wrsEARYKAG0FgmpWupIJEGqFX0gW+jc/RRQAAAAAABwAIHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcme/gNhsECXuT+Z8zWExCxMkdXlnzdfW82OOnMkc
+wmQuBhYhBLJeQwGme2rVBVfc02qFX0gW+jc/AAAJVQD/WBztjdr2OoThn0zr
+FsI+aE1fjFnKuUCtxqWF9rUgzU8BALHqGkW2wOc1NfO7HMmGn0Cmcms2wYds
+V1VNGY97kqcK
+=SVah
+-----END PGP SIGNATURE-----
+
+
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="attachment-count"
+
+2
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="stripped-text"
+
+Can I reply to this via email??? 🤞
+
+
+Sent with Proton Mail secure email.
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="stripped-html"
+
+<html><head></head><body><div style="font-family: Arial, sans-serif; font-size: 14px;">Can I reply to this via email???&#160;&#129310;<br></div><div style="font-family: Arial, sans-serif; font-size: 14px;"><br></div>
+<div style="font-family: Arial, sans-serif; font-size: 14px;" class="protonmail_signature_block">
+    <div class="protonmail_signature_block-user protonmail_signature_block-empty">
+        
+            </div>
+    
+            <div class="protonmail_signature_block-proton">
+        Sent with <a href="https://proton.me/mail/home" target="_blank">Proton Mail</a> secure email.
+    </div>
+</div>
+<div style="font-family: Arial, sans-serif; font-size: 14px;"><br></div></body></html>
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="token"
+
+5f9e963e30e1c71fa6f7fe04f331724147c2db2d006a0c0c1c
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="timestamp"
+
+1784068778
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab
+Content-Disposition: form-data; name="signature"
+
+01fcb4f78a1d284f342fa3f037df70d89da3bc5dfb390f3f6f2f21c942d4e5d4
+--ef83abc14c9afb358c1b75a28f8dbdd59c3af1af4201cebc8ba9682cdfab--
